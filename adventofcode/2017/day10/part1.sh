@@ -9,7 +9,7 @@ grep -oE "[0-9]+" |
 	do cat <(tail -$(($sz-$((pos)))) list1) <(head -$((pos)) list1) > list2
 	   cat <(head -$len list2 | tac) <(tail -$(($sz-$len)) list2) > list3
 	   cat <(tail -$((pos)) list3) <(head -$(($sz-$((pos)))) list3) > list1
-	   ((pos=($pos+$len+$((shift++)))%$sz))
+	   ((pos=($pos+$len+$((skip++)))%$sz))
 	done
 
-echo $(($(head -2 list | tr '\n' '*')1)); rm -f list[1-3]
+echo $(($(head -2 list1 | tr '\n' '*')1)); rm -f list[1-3]
