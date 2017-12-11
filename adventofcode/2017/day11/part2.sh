@@ -1,6 +1,6 @@
 #!/bin/bash
 
-grep -oE "[ns][ew]*" |
+grep -o "[ns][ew]*" |
 	sed 's/ne/((x+=1)); ((y-=1)); echo $x $y;/g;
          s/sw/((x-=1)); ((y+=1)); echo $x $y;/g;
          s/se/((y-=1)); ((z+=1)); echo $y $z;/g;
