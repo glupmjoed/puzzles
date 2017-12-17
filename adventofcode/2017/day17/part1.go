@@ -8,11 +8,10 @@ type elem struct {
 }
 
 func main() {
-	var n int
+	var buflen, n int
 	fmt.Scanf("%d", &n)
 	buf := &elem{}
 	buf.next = buf
-	var buflen int
 	for buflen = 1; buflen <= 2017; buflen++ {
 		for steps := n % buflen; steps > 0; steps-- {
 			buf = buf.next
