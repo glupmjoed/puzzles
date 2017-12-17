@@ -21,7 +21,7 @@ The values in this sequence grow fast: They more than double every time a corner
 
 [source,python]
 ----
-Python 2.7.9 (default, Aug 13 2016, 17:56:53) 
+Python 2.7.9 (default, Aug 13 2016, 17:56:53)
 [GCC 4.9.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 
