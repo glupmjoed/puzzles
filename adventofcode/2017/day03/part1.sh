@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./bin/part1
+./bin/find_distance
