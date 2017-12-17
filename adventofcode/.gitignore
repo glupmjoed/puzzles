@@ -1,4 +1,7 @@
 2017/day*/bin/*
+2017/day*/*.html
+2017/day*/*.pdf
+2017/day*/*.pdfmarks
 2017/day*/*.txt
 2017/day*/tmp*
 2017/day03/part1
