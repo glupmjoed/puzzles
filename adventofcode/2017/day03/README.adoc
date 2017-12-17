@@ -19,7 +19,7 @@ The second part of the puzzle asks you to find the first value that is larger th
 
 The values in this sequence grow fast: They more than double every time a corner in each ring is turned. So I ended up just finding the answer by hand:
 
-[source,python]
+[source,shell]
 ----
 Python 2.7.9 (default, Aug 13 2016, 17:56:53)
 [GCC 4.9.2] on linux2
