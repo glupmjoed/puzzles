@@ -1,0 +1,104 @@
+Day 3: Spiral Memory
+====================
+
+https://adventofcode.com/2017/day/3
+
+Part 1
+------
+
+The first part of the puzzle asks you to find the link:https://en.wikipedia.org/wiki/Taxicab_geometry[Manhattan Distance] between an arbitrary value in a sequential square spiral pattern and the center square of that pattern.
+
+My solution is based on the observation that the highest value in each "ring" of the spiral is an odd square number (1, 9, 25, ...). So the formula for jumping to the lower left corner of the next ring is either `((ring number) * 2 + 1) ^ 2` or `(previous corner) + (ring number) * 8`.
+
+When the ring containing the target value has been found, we know that the distance to the center must be somewhere between `ring number` and `(ring number) * 2` and the numerical distance between input value and corner value lets us obtain the actual distance by "indexing" into this alternating pattern.
+
+Part 2
+------
+
+The second part of the puzzle asks you to find the first value that is larger than your puzzle input in the link:https://oeis.org/A141481[sequence of sums of selected preceding terms in a square spiral].
+
+The values in this sequence grow fast: They more than double every time a corner in each ring is turned. So I ended up just finding the answer by hand:
+
+[source,python]
+----
+Python 2.7.9 (default, Aug 13 2016, 17:56:53) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> 806 + 23 + 25 + 26
+880
+>>> _ + 25 + 26
+931
+>>> _ + 26                    # ring 3 right
+957
+>>> _ + 931 + 26 + 54
+1968
+>>> _ + 26 + 54 + 57
+2105
+>>> _ + 54 + 57 + 59
+2275
+>>> _ + 57 + 59
+2391
+>>> _ + 59                    # ring 3 top
+2450
+>>> _ + 2391 + 59 + 122
+5022
+>>> _ + 59 + 122 + 133
+5336
+>>> _ + 122 + 133 + 142
+5733
+>>> _ + 133 + 142 + 147
+6155
+>>> _ + 142 + 147
+6444
+>>> _ + 147                   # ring 3 left
+6591
+>>> _ + 6444 + 147 + 304
+13486
+>>> _ + 147 + 304 + 330
+14267
+>>> _ + 304 + 330 + 351
+15252
+>>> _ + 330 + 351 + 362
+16295
+>>> _ + 351 + 362
+17008
+>>> _ + 362                   # ring 3 bottom
+17370
+>>> _ + 17008 + 362 + 747
+35487
+>>> _ + 362 + 747 + 806
+37402
+>>> _ + 747 + 806 + 880
+39835
+>>> _ + 806 + 880 + 931
+42452
+>>> _ + 880 + 931 + 957
+45220
+>>> _ + 931 + 957
+47108
+>>> _ + 957                   # ring 4 right
+48065
+>>> _ + 47108 + 957 + 1968
+98098
+>>> _ + 957 + 1968 + 2105
+103128
+>>> _ + 1968 + 2105 + 2275
+109476
+>>> _ + 2105 + 2275 + 2391
+116247
+>>> _ + 2275 + 2391 + 2450
+123363
+>>> _ + 2391 + 2450
+128204
+>>> _ + 2450                  # ring 4 top
+130654
+>>> _ + 128204 + 2450 + 5022
+266330
+>>> _ + 2450 + 5022 + 5336
+279138
+>>> _ + 5022 + 5336 + 5733
+295229
+>>> _ + 5336 + 5733 + 6155
+312453
+----
