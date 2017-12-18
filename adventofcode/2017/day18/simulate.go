@@ -13,21 +13,21 @@ import (
 type regs map[string]int64
 
 func main() {
-	content, _ := ioutil.ReadAll(os.Stdin)
-	lines := strings.Split(string(content), "\n")
+	input, _ := ioutil.ReadAll(os.Stdin)
+	lines := strings.Split(string(input), "\n")
 	lines = lines[:len(lines)-1]
 	flag.Parse()
 
 	switch flag.Arg(0) {
 
 	case "1":
-		sound := make(chan int64)
+		play := make(chan int64)
 		go func() {
 			for {
-				<-sound
+				<-play
 			}
 		}()
-		run(lines, 0, sound, nil)
+		run(lines, 0, play, nil)
 
 	case "2":
 		c0to1, c1to0 := make(chan int64, 64), make(chan int64, 64)
