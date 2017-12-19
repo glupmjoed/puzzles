@@ -13,6 +13,7 @@ func main() {
 	var row, col, dir int
 	col, dir = strings.Index(lines[row], "|"), 1
 	for val := byte('|'); ; {
+		// vertical walk
 		for val != ' ' {
 			fmt.Printf("%c", val)
 			row += dir
@@ -20,6 +21,7 @@ func main() {
 		}
 		row -= dir
 		val = lines[row][col]
+		// horizontal walk
 		switch {
 		case lines[row][col+1] != ' ':
 			end := strings.Index(lines[row][col+1:], " ")
@@ -27,7 +29,7 @@ func main() {
 			col += end
 		case lines[row][col-1] != ' ':
 			beg := strings.LastIndex(lines[row][:col], " ")
-			printBytesRev(lines[row][beg+1 : col])
+			printBytesReverse(lines[row][beg+1 : col])
 			col = beg + 1
 		default:
 			return
@@ -43,7 +45,7 @@ func main() {
 	}
 }
 
-func printBytesRev(s string) {
+func printBytesReverse(s string) {
 	for i := len(s) - 1; i >= 0; i-- {
 		fmt.Printf("%c", s[i])
 	}
