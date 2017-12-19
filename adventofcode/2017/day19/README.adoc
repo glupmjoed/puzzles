@@ -1,0 +1,27 @@
+Day 19: A Series of Tubes
+=========================
+
+https://adventofcode.com/2017/day/19
+
+Part 1
+------
+
+The first part of the puzzle asks you in what order the characters `[A-Z]` appear if you follow the path (starting from the top) in a diagram similar to the one below. The path is made up of the characters `[-+|A-Z]`.
+
+[source]
+----
+     |          
+     |  +--+    
+     A  |  C    
+ F---|----E|--+ 
+     |  |  |  D 
+     +B-+  +--+ 
+                
+----
+
+My solution consists of a small Go program that walks the path and prints it out in a linear fashion (e.g. "`||A||+B-+|-|+--+C||+--+D+--|E----|---F`") and a Bash wrapper that collects the letters using `sed`.
+
+Part 2
+------
+
+The second part of the puzzle asks you to find the length of the path. The solution is obtained trivially using `walk.go` from part 1 and the `wc` command to count the number of bytes.
