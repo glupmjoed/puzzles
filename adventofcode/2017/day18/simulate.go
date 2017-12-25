@@ -53,11 +53,17 @@ func run(lines []string, id int64, snd, rcv chan int64) {
 				i += r.eval(args[2]) - 1
 			}
 
+		case "jnz":
+			if r.eval(args[1]) != 0 {
+				i += r.eval(args[2]) - 1
+			}
+
 		case "mod":
 			r[args[1]] %= r.eval(args[2])
 
 		case "mul":
 			r[args[1]] *= r.eval(args[2])
+			fmt.Println("mul")
 
 		case "rcv":
 			select {
@@ -78,6 +84,10 @@ func run(lines []string, id int64, snd, rcv chan int64) {
 			case <-time.After(1 * time.Second):
 				return
 			}
+
+		case "sub":
+			r[args[1]] -= r.eval(args[2])
+
 		}
 	}
 }
