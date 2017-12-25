@@ -1,0 +1,11 @@
+Day 23: Coprocessor Conflagration
+=================================
+
+https://adventofcode.com/2017/day/23
+
+Part 1
+------
+
+This puzzle adds some instructions to the architecture described on link:https://adventofcode.com/2017/day/18[day 18]. Part 1 asks you to simulate a program containing a subset of these instructions and count the number of times the `mul` instruction is invoked.
+
+I extended link:../day18/[my solution from day 18] to include support for the new instructions and log uses of `mul` to `stdout`. The answer to part 1 is obtained by wrapping the simulator from day 18 in a shell script that counts lines containing "mul".
