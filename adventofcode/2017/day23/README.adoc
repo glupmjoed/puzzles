@@ -8,4 +8,207 @@ Part 1
 
 This puzzle adds some instructions to the architecture described on link:https://adventofcode.com/2017/day/18[day 18]. Part 1 asks you to simulate a program containing a subset of these instructions and count the number of times the `mul` instruction is invoked.
 
-I extended link:../day18/[my solution from day 18] to include support for the new instructions and log uses of `mul` to `stdout`. The answer to part 1 is obtained by wrapping the simulator from day 18 in a shell script that counts lines containing "mul".
+I extended link:../day18/[my solution from day 18] to include support for the new instructions and log uses of `mul` to `stdout`. The answer to part 1 is obtained by wrapping the simulator from day 18 in a shell script that counts the number of times `mul` has been logged.
+
+Part 2
+------
+
+The second part of the puzzle asks you what value would be left in the `h` register after the program runs to completion, with a minor change to register initialization: Register `a` now starts at `1` (instead of `0`).
+
+The program seems to be running for a _very_ long time in this configuration, and the puzzle text suggests that some kind of code optimization might be neccesary to complete part 2.
+
+Code Transformation
+~~~~~~~~~~~~~~~~~~~
+
+The approach I took was to make a 1:1 port from assembly to C:
+
+[source,c]
+----
+#include <stdio.h>
+int a, b, c, d, e, f, g, h;
+int main() {
+    a = 1;
+    b = 65;         // "set b 65"
+    c = b;          // "set c b"
+    if (a) goto L1; // "jnz a 2"
+    goto L2;        // "jnz 1 5"
+L1: b *= 100;       // "mul b 100"
+    b -= -100000;   // "sub b -100000"
+    c = b;          // "set c b"
+    c -= -17000;    // "sub c -17000"
+L2: f = 1;          // "set f 1"
+    d = 2;          // "set d 2"
+L5: e = 2;          // "set e 2"
+L4: g = d;          // "set g d"
+    g *= e;         // "mul g e"
+    g -= b;         // "sub g b"
+    if (g) goto L3; // "jnz g 2"
+    f = 0;          // "set f 0"
+L3: e -= -1;        // "sub e -1"
+    g = e;          // "set g e"
+    g -= b;         // "sub g b"
+    if (g) goto L4; // "jnz g -8"
+    d -= -1;        // "sub d -1"
+    g = d;          // "set g d"
+    g -= b;         // "sub g b"
+    if (g) goto L5; // "jnz g -13"
+    if (f) goto L6; // "jnz f 2"
+    h -= -1;        // "sub h -1"
+L6: g = b;          // "set g b"
+    g -= c;         // "sub g c"
+    if (g) goto L7; // "jnz g 2"
+    goto END;       // "jnz 1 3"
+L7: b -= -17;       // "sub b -17"
+    goto L2;        // "jnz 1 -23"
+END:
+    printf("h: %d\n", h);
+}
+----
+
+The next step was to structure the program (removing ++goto++s and labels):
+
+[source,c]
+----
+#include <stdio.h>
+int a, b, c, d, e, f, g, h;
+int main() {
+  a = 1;
+  b = 65;
+  c = b;
+  b *= 100;            // Since a == 1, this line and the following three lines
+  b -= -100000;        // can be executed unconditionally. The lines 7-8 and
+  c = b;               // label L1 from the previous iteration has been removed.
+  c -= -17000;
+  while (1) {          // Replaces L2
+    f = 1;
+    d = 2;
+    do {               // Replaces L5
+      e = 2;
+      do {             // Replaces L4
+        g = d;
+        g *= e;
+        g -= b;
+        if (!g) f = 0; // Replaces lines 19-20, removes L3
+        e -= -1;
+        g = e;
+        g -= b;
+      } while (g);     // Replaces line 24
+      d -= -1;
+      g = d;
+      g -= b;
+    } while (g);       // Replaces line 28
+    if (!f) h -= -1;   // Replaces lines 29-30, removes L6
+    g = b;
+    g -= c;
+    if (!g) goto END;  // Replaces lines 33-34, removes L7
+    b -= -17;
+  }                    // Replaces line 36
+END:
+  printf("h: %d\n", h);
+}
+----
+
+Shortening and combining some of the arithmetic expressions increased readability dramatically, and every expression involving `g` could be incorporated into one of the conditional jump expressions:
+
+[source,c]
+----
+#include <stdio.h>
+int b, c, d, e, f, h;
+int main() {
+  b = 106500;                  // Replaces lines 5, 7 and 8
+  c = b + 17000;               // Replaces lines 6, 9 and 10
+  while (1) {
+    f = 1;
+    d = 2;
+    do {
+      e = 2;
+      do {
+        if (d * e == b) f = 0; // Replaces lines 17-20
+        e++;                   // Rewrite of line 21
+      } while (e != b);        // Replaces lines 22-24
+      d++;                     // Rewrite of line 25
+    } while (d != b);          // Replaces lines 26-28
+    if (!f) h++;               // Rewrite of line 29
+    if (b == c) goto END;      // Replaces lines 30-32
+    b += 17;                   // Rewrite of line 33
+  }
+END:
+  printf("h: %d\n", h);
+}
+----
+
+The main body of both `do-while` loops is executed for all values of `d` and `e` in the sequence (`2`, `3`, `4`, ..., `b-1`). This can be expressed more concisely with two functionally equivalent `for` loops, and a similar transformation can be performed on the outermost `while` loop:
+
+[source,c]
+----
+#include <stdio.h>
+int b, d, e, f, h;
+int main() {
+  for (b = 106500; b <= 106500+17000; b += 17) {
+    f = 1;
+    for (d = 2; d < b; d++) {   // Replaces lines 8-9 and 15-16
+      for (e = 2; e < b; e++) { // Replaces lines 10-11 and 13-14
+        if (d * e == b) f = 0;
+      }
+    }
+    if (!f) h++;
+  }
+  printf("h: %d\n", h);
+}
+----
+
+Code Optimization
+~~~~~~~~~~~~~~~~~
+
+At this point it appears that `h` is incremented each time a `b` in the sequence (+106500 + **0***17+, +106500 + **1***17+, +106500 + **2***17+, ..., +106500 + **1000***17+) has a divisor in the sequence (`2`, `3`, `4`, ..., `b-1`). In other words, the program counts the numbers in the first sequence that are not prime numbers.
+
+A more efficient way to achieve the same result is to remove the inner loop and use the modulo operator to identify divisors. I haven't benchmarked it (for practical reasons), but this should result in at least a 200000x speedup compared to the original code:
+
+[source,c]
+----
+#include <stdio.h>
+int b, d, h;
+int main() {
+  for (b = 106500; b <= 106500+17000; b += 17) {
+    for (d = 2; d < b; d++) {
+      if (b % d) continue;
+      h++;
+      break;
+    }
+  }
+  printf("h: %d\n", h);
+}
+----
+
+The above C program provides the answer to the second part of the puzzle in less than 50ms.
+
+The equivalent optimized assembly (using `mod`) ends up looking like this:
+
+[source,assembly]
+----
+set a 1
+set b 65
+set c b
+jnz a 2
+jnz 1 5
+mul b 100
+sub b -100000
+set c b
+sub c -17000
+set d 2
+set g b
+mod g d
+jnz g 3
+sub h -1
+jnz 1 5
+sub d -1
+set g d
+sub g b
+jnz g -8
+set g b
+sub g c
+jnz g 2
+jnz 1 3
+sub b -17
+jnz 1 -15
+----
