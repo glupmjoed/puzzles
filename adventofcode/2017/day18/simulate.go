@@ -12,6 +12,8 @@ import (
 
 type regs map[string]int64
 
+var h int64
+
 func main() {
 	input, _ := ioutil.ReadAll(os.Stdin)
 	lines := strings.Split(string(input), "\n")
@@ -28,6 +30,7 @@ func main() {
 			}
 		}()
 		run(lines, 0, play, nil)
+		fmt.Println("h:", h)
 
 	case "2":
 		c0to1, c1to0 := make(chan int64, 64), make(chan int64, 64)
@@ -89,6 +92,7 @@ func run(lines []string, id int64, snd, rcv chan int64) {
 			r[args[1]] -= r.eval(args[2])
 
 		}
+		h = r["h"]
 	}
 }
 
