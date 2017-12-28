@@ -1,25 +1,25 @@
-set a 1
-set b 65
-set c b
-jnz a 2
-jnz 1 5
-mul b 100
-sub b -100000
-set c b
-sub c -17000
-set d 2
-set g b
-mod g d
-jnz g 3
-sub h -1
-jnz 1 5
-sub d -1
-set g d
-sub g b
-jnz g -8
-set g b
-sub g c
-jnz g 2
-jnz 1 3
-sub b -17
-jnz 1 -15
+    set a 1
+    set b 65
+    set c b
+    jnz a 2
+    jnz 1 5
+    mul b 100
+    sub b -100000
+    set c b
+    sub c -17000
+    set d 2
+    set g b
+    mod g d
+    jnz g 3
+    sub h -1
+    jnz 1 5
+    sub d -1
+    set g d
+    sub g b
+    jnz g -8
+    set g b
+    sub g c
+    jnz g 2
+    jnz 1 3
+    sub b -17
+    jnz 1 -15
