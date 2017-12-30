@@ -27,21 +27,27 @@ The approach I took was to make a 1:1 port from assembly to C:
 include::iteration1.c[]
 ----
 
-The next step is to add more structure to the program (removing ++goto++s and labels):
+The next step is to add more structure to the program (removing ++goto++s and
+labels):
 
 [source,c]
 ----
 include::iteration2.c[]
 ----
 
-Shortening and combining some of the arithmetic expressions increases readability dramatically, and every expression involving `g` can be incorporated into one of the conditional jump expressions:
+Shortening and combining some of the arithmetic expressions increases readability
+dramatically, and every expression involving `g` can be incorporated into one of
+the conditional jump expressions:
 
 [source,c]
 ----
 include::iteration3.c[]
 ----
 
-The main body of both `do-while` loops is executed for all values of `d` and `e` in the sequence (`2`, `3`, `4`, ..., `b-1`). This can be expressed more concisely with two functionally equivalent `for` loops, and a similar transformation can be performed on the outermost `while` loop:
+The main body of both `do-while` loops is executed for all values of `d` and `e`
+in the sequence (`2`, `3`, `4`, ..., `b-1`). This can be expressed more concisely
+with two functionally equivalent `for` loops, and a similar transformation can be
+performed on the outermost `while` loop:
 
 [source,c]
 ----
@@ -51,16 +57,24 @@ include::iteration4.c[]
 Code Optimization
 ~~~~~~~~~~~~~~~~~
 
-At this point it appears that `h` is incremented each time a `b` in the sequence (+106500 + **0***17+, +106500 + **1***17+, +106500 + **2***17+, ..., +106500 + **1000***17+) has a divisor in the sequence (`2`, `3`, `4`, ..., `b-1`). In other words, the program counts the numbers in the first sequence that are not prime numbers.
+At this point it appears that `h` is incremented each time a `b` in the sequence
+(+106500 + **0***17+, +106500 + **1***17+, +106500 + **2***17+, ..., +106500
++ **1000***17+) has a divisor in the sequence (`2`, `3`, `4`, ..., `b-1`). In other
+words, the program counts the numbers in the first sequence that are not prime
+numbers.
 
-A more efficient way to achieve the same result is to remove the inner loop and use the modulo operator to identify divisors. I haven't benchmarked it (for practical reasons), but this should result in at least a 200000x speedup compared to the original code:
+A more efficient way to achieve the same result is to remove the inner loop and
+use the modulo operator to identify divisors. I haven't benchmarked it (for
+practical reasons), but this should result in at least a 200000x speedup compared
+to the original code:
 
 [source,c]
 ----
 include::iteration5.c[]
 ----
 
-The above C program provides the answer to the second part of the puzzle in less than 50ms.
+The above C program provides the answer to the second part of the puzzle in less
+than 50ms.
 
 The equivalent optimized assembly (using `mod`) ends up looking like this:
 
