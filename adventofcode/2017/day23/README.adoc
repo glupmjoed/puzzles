@@ -27,14 +27,14 @@ The approach I took was to make a 1:1 port from assembly to C:
 include::iteration1.c[]
 ----
 
-The next step was to structure the program (removing ++goto++s and labels):
+The next step is to add more structure to the program (removing ++goto++s and labels):
 
 [source,c]
 ----
 include::iteration2.c[]
 ----
 
-Shortening and combining some of the arithmetic expressions increased readability dramatically, and every expression involving `g` could be incorporated into one of the conditional jump expressions:
+Shortening and combining some of the arithmetic expressions increases readability dramatically, and every expression involving `g` can be incorporated into one of the conditional jump expressions:
 
 [source,c]
 ----
