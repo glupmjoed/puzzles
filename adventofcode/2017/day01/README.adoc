@@ -1,0 +1,68 @@
+Day 1: Inverse Captcha
+======================
+
+https://adventofcode.com/2017/day/1
+
+Part 1
+------
+
+The first part of the puzzle asks you to find the sum of all digits that matches
+the next digit in a circular list (the puzzle input).
+
+I approached this primarily as a string manipulation problem: We use `grep` to
+break up the input into lines (one character per line), and `sed` repeats the first line and places it after the last:
+
+[source,shell]
+$ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G'
+
+Output:
+----
+1
+2
+2
+1
+1
+----
+
+Breakdown of `sed` commands:
+
+* `1p` repeats the first line
+* `1{h;d}` copies the line that got repeated into ++sed++'s _hold buffer_ (`h`)
+  and deletes it from the output (`d`)
+* `$G` appends a newline to the output followed by the contents of the hold
+  buffer
+
+The next step is to count repeated adjacent characters and remove the duplicates. `uniq` does that for us:
+
+[source,shell]
+$ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c
+
+Output:
+----
+      1 1
+      2 2
+      2 1
+----
+
+The lines above display groups of adjacent digits (right column) and the number, `n`, of duplicates in each group (left column). To find the sum of digits in the input that match the next digit, we need to count each right-column digit `n-1` times:
+
+[source,shell]
+$ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c |
+	awk '{ printf "(%d-1)*%d+", $1, $2 } END { print 0 }'
+
+Output:
+----
+(1-1)*1+(2-1)*2+(2-1)*1+0
+----
+
+Lastly, `bc` is used to parse the arithmetic expression:
+
+[source,shell]
+$ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c |
+	awk '{ printf "(%d-1)*%d+", $1, $2 } END { print 0 }' | bc
+
+Output:
+----
+3
+----
+
