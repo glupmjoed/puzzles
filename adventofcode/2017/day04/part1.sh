@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sed -r '/(\b\w+\b).*\1/d' | wc -l
+sed -E '/(\b\w+\b).*\1/d' | wc -l

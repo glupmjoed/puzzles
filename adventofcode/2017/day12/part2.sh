@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed -r 's/[^0-9]*([0-9]+)[^0-9]+/\1|/g; s/[0-9]+/_&_/g' | ./find_grp.sh
+sed -E 's/[^0-9]*([0-9]+)[^0-9]+/\1|/g; s/[0-9]+/_&_/g' | ./find_grp.sh
 
 arglen=-1
 while [ $arglen -ne 0 ]
