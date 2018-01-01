@@ -1,0 +1,38 @@
+Day 4: High-Entropy Passphrases
+===============================
+
+https://adventofcode.com/2017/day/4
+
+Part 1
+------
+
+The first part of the puzzle asks you to count the number of lines in the input
+containing no duplicate words.
+
+I use `sed` to delete any lines with duplicate words, and `wc` to count the
+remaining number of lines:
+
+[source,shell]
+sed -r '/(\b\w+\b).*\1/d' | wc -l
+
+Breakdown of `sed` command:
+
+* `-r` makes use of _extended regular expressions_ rather than basic regular
+  expressions
+* `\w+` matches one or more _word characters_ (any letters, digits or underscores)
+* `\b` matches a word boundary, i.e. the space "between" a word- and a non-word
+  character
+* `.*` matches a sequence of any characters and of any length
+* `\1` is a back-reference to the first matched subexpression, in this case the
+  match made by `\b\w+\b`
+* `sed '/.../d'` deletes a line if any part of it matches the expression between
+  `/` and `/`
+
+Taken together, the expression `(\b\w+\b).*\1` matches a line containg a word, if and only if the same word occurs again at some point on the right hand side (but still on the same line).
+
+Part 2
+------
+
+The second part of the puzzle asks almost the same question as part 1, but with the added rule that all permutations of a word count as the same word.
+
+I solved it by sorting the characters within each word with link:sort_chars.py[a few lines of Python], and reused the solution from part 1 to remove lines containing duplicates.
