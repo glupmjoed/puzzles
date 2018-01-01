@@ -12,6 +12,14 @@ My solution is based on the observation that the highest value in each "ring" of
 
 When the ring containing the target value has been found, we know that the distance to the center must be somewhere between `ring number` and `(ring number) * 2` and the numerical distance between input value and corner value lets us obtain the actual distance by "indexing" into this alternating pattern.
 
+The main logic is implemented in these three lines from `find_distance.c`:
+[source,c]
+----
+  for (corner = 1; corner < square; corner += ++ring * 8);
+  int idx = corner - square;
+  printf("%d\n", idx/ring%2 ? ring+(idx%ring) : ring*2-(idx%ring));
+----
+
 Part 2
 ------
 
