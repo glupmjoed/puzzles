@@ -22,8 +22,25 @@ below. The path is made up of the characters `[-+|A-Z]`.
 ----
 
 My solution consists of a link:walk.go[Go program] that walks the path and prints
-it out in a linear fashion (e.g. "`||A||+B-+|-|+--+C||+--+D+--|E----|---F`") and
-a Bash wrapper that collects the letters using `sed`.
+it out in a linear fashion.
+
+[source,shell]
+$ ./bin/walk && echo
+
+Output:
+----
+||A||+B-+|-|+--+C||+--+D+--|E----|---F
+----
+
+`sed` collects the letters and adds a newline to the output:
+
+[source,shell]
+$ ./bin/walk | sed -E 's/[^A-Z]*([A-Z])+[^A-Z]*/\1/g; s/$/\n/g'
+
+Output:
+----
+ABCDEF
+----
 
 Part 2
 ------
