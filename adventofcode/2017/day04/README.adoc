@@ -28,11 +28,16 @@ Breakdown of `sed` command:
 * `sed '/.../d'` deletes a line if any part of it matches the expression between
   `/` and `/`
 
-Taken together, the expression `(\b\w+\b).*\1` matches a line containg a word, if and only if the same word occurs again at some point on the right hand side (but still on the same line).
+Taken together, the expression `(\b\w+\b).*\1` matches a line containg a word, if
+and only if the same word occurs again at some point on the right hand side (but
+still on the same line).
 
 Part 2
 ------
 
-The second part of the puzzle asks almost the same question as part 1, but with the added rule that all permutations of a word count as the same word.
+The second part of the puzzle asks almost the same question as part 1, but with
+the added rule that all permutations of a word count as the same word.
 
-I solved it by sorting the characters within each word with link:sort_chars.py[a few lines of Python], and reused the solution from part 1 to remove lines containing duplicates.
+I solved it by sorting the characters within each word with link:sort_chars.py[a
+few lines of Python], and reused the solution from part 1 to remove lines
+containing duplicates.

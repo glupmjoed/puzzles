@@ -10,7 +10,8 @@ The first part of the puzzle asks you to find the sum of all digits that matches
 the next digit in a circular list (the puzzle input).
 
 I approached this primarily as a string manipulation problem: We use `grep` to
-break up the input into lines (one character per line), and `sed` repeats the first line and places it after the last:
+break up the input into lines (one character per line), and `sed` repeats the
+first line and places it after the last:
 
 [source,shell]
 $ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G'
@@ -44,7 +45,10 @@ Output:
       2 1
 ----
 
-The lines above display groups of adjacent digits (right column) and the number, `n`, of duplicates in each group (left column). To find the sum of digits in the input that match the next digit, we need to count each right-column digit `n-1` times:
+The lines above display groups of adjacent digits (right column) and the number,
+`n`, of duplicates in each group (left column). To find the sum of digits in the
+input that match the next digit, we need to count each right-column digit `n-1`
+times:
 
 [source,shell]
 $ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c |
@@ -65,4 +69,3 @@ Output:
 ----
 3
 ----
-
