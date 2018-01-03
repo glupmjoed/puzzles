@@ -46,5 +46,13 @@ Part 2
 ------
 
 The second part of the puzzle asks you to find the length of the path. The
-solution is obtained trivially using `walk.go` from part 1 and the `wc` command
-to count the number of bytes.
+solution is obtained trivially using link:walk.go[] from part 1 and the `wc`
+command to count the number of bytes:
+
+[source,shell]
+$ ./bin/walk | wc -c
+
+Output:
+----
+38
+----
