@@ -21,9 +21,9 @@ below. The path is made up of the characters `[-+|A-Z]`.
                 
 ----
 
-My solution consists of a small Go program that walks the path and prints it out
-in a linear fashion (e.g. "`||A||+B-+|-|+--+C||+--+D+--|E----|---F`") and a Bash
-wrapper that collects the letters using `sed`.
+My solution consists of a link:walk.go[Go program] that walks the path and prints
+it out in a linear fashion (e.g. "`||A||+B-+|-|+--+C||+--+D+--|E----|---F`") and
+a Bash wrapper that collects the letters using `sed`.
 
 Part 2
 ------
