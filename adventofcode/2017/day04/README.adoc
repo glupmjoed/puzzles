@@ -13,11 +13,11 @@ I use `sed` to delete any lines with duplicate words, and `wc` to count the
 remaining number of lines:
 
 [source,shell]
-sed -r '/(\b\w+\b).*\1/d' | wc -l
+sed -E '/(\b\w+\b).*\1/d' | wc -l
 
 Breakdown of `sed` command:
 
-* `-r` makes use of _extended regular expressions_ rather than basic regular
+* `-E` makes use of _extended regular expressions_ rather than basic regular
   expressions
 * `\w+` matches one or more _word characters_ (any letters, digits or underscores)
 * `\b` matches a word boundary, i.e. the space "between" a word- and a non-word
