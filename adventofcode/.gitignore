@@ -1,9 +1,9 @@
-2017/day*/bin/*
-2017/day*/build/*
-2017/day*/*.html
-2017/day*/*.pdf
-2017/day*/*.pdfmarks
-2017/day*/*.txt
+*/day*/bin/*
+*/day*/build/*
+*/day*/*.html
+*/day*/*.pdf
+*/day*/*.pdfmarks
+*/day*/*.txt
 2017/day*/tmp*
 2017/day03/part1
 2017/day05/maze
