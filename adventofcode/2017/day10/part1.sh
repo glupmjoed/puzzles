@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo $(($(./hash.sh | head -2 | tr '\n' '*')1))
+grep -oE [0-9]+ | ./bin/sparse_hash | head -2 | paste -sd* | bc
