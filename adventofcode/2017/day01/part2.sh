@@ -1,8 +1,4 @@
 #!/bin/bash
 
-split -l $(($(cat | grep -o . | tee tmp | wc -l) / 2)) tmp
-
-cat xaa | paste - xab | sed -nE 's/([0-9]).*\1/\1+\1+/p' | tr -d '\n' |
-    echo $(cat)0 | bc
-
-rm -f tmp xaa xab
+d=$(cat); echo -e ${d:0:${#d}/2}'\n'${d:${#d}/2:${#d}/2} | sed -E 's/\B/ /g' |
+    rs -T | awk 'BEGIN { acc = 0 } $1 == $2 { acc += $1*2 } END { print acc }'
