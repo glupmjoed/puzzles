@@ -51,19 +51,9 @@ input that match the next digit, we need to count each right-column digit `n-1`
 times:
 
 [source,shell]
+
 $ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c |
-	awk '{ printf "(%d-1)*%d+", $1, $2 } END { print 0 }'
-
-Output:
-----
-(1-1)*1+(2-1)*2+(2-1)*1+0
-----
-
-Lastly, `bc` is used to parse the arithmetic expression:
-
-[source,shell]
-$ echo "1221" | grep -o . | sed '1p; 1{h;d}; $G' | uniq -c |
-	awk '{ printf "(%d-1)*%d+", $1, $2 } END { print 0 }' | bc
+      awk '{ acc += ($1-1) * $2 } END { print acc }'
 
 Output:
 ----
