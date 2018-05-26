@@ -1,3 +1,3 @@
 #!/bin/bash
 
-awk '{ print $5}' | ./bin/judge1
+cut -d ' ' -f 5 | ./bin/judge1
