@@ -1,3 +1,3 @@
 #!/bin/bash
 
-tee >(wc -l) | tac | ./calc_delay
+awk '{ print } END { print NR }' | tac | ./calc_delay
