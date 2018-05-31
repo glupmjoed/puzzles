@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./bin/iteration5 | awk '{ print $2 }'
+./bin/iteration5 | cut -d ' ' -f 2
