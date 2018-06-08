@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./sim.sh | sort -s -k 2 | tac | uniq -f 1 | sort -nr | awk 'NR==1 { print $1 }'
+./sim.sh | tac | sort -k 2 -u | sort -n | awk 'END { print $1 }'
