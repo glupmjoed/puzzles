@@ -1,0 +1,7 @@
+-- HUMAN RESOURCE MACHINE PROGRAM --
+
+a:
+    INBOX
+    JUMPZ    a
+    OUTBOX
+    JUMP     a
