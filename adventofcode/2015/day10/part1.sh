@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./filter.sh 40
+(echo 40; cat) | ./bin/filter
