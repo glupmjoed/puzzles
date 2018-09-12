@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./run_sequence.sh 50
+./filter.sh 50
