@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./generate.sh 1
+./generate.sh $(cat) | head -1

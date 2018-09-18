@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./generate.sh 2 | tail -1
+./generate.sh $(cat) | sed '2q;d'
