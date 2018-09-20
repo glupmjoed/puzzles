@@ -1,0 +1,24 @@
+Day 2: I Was Told There Would Be No Math
+========================================
+
+https://adventofcode.com/2015/day/2
+
+== Part 1
+
+The input to this puzzle is a list of rectangular box dimensions (e.g.
++17x8x26+). Part 1 asks you to find the combined surface area of all boxes plus
+the combined area of the smallest side of each box.
+
+I use an AWK script to sort the dimensions of each box in increasing order
+(+link:sort3.awk[sort3.awk]+), and pipe the sorted dimensions to another script
+(+link:paper.awk[paper.awk]+) that calculates the surface area plus the smallest
+side of each box (+3 * dim1 * dim2 + 2 dim1 * dim3 + 2 * dim2 * dim3+) and adds
+everything together.
+
+== Part 2
+
+The second part of the puzzle asks you to find the combined volume of all boxes
+plus the combined perimeters of the smallest side of each box. I sort the
+dimensions using the sorting script above and let the script
+(+link:ribbon.awk[ribbon.awk]+) handle the calculation (+2 * dim1 + 2 * dim2
++ dim1 * dim2 * dim3+).
