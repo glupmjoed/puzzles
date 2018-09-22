@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bf <(tr '()' '+-'; echo .) | od -dAn | bc
+bf <(tr '()' '+-'; echo .) | od -dAn | xargs
