@@ -25,7 +25,7 @@ My solution consists of a link:walk.go[Go program] that walks the path and print
 it out in a linear fashion.
 
 [source,shell]
-$ ./bin/walk && echo
+$ ./bin/walk < example && echo
 
 Output:
 ----
@@ -35,7 +35,7 @@ Output:
 `sed` collects the letters and adds a newline to the output:
 
 [source,shell]
-$ ./bin/walk | sed -E 's/[^A-Z]*([A-Z])+[^A-Z]*/\1/g; s/$/\n/g'
+$ ./bin/walk < example | sed -E 's/[^A-Z]*([A-Z])+[^A-Z]*/\1/g; s/$/\n/g'
 
 Output:
 ----
@@ -50,7 +50,7 @@ solution is obtained trivially using link:walk.go[] from part 1 and the `wc`
 command to count the number of bytes:
 
 [source,shell]
-$ ./bin/walk | wc -c
+$ ./bin/walk < example | wc -c
 
 Output:
 ----

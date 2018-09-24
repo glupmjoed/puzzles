@@ -13,7 +13,7 @@ I use `sed` to delete any lines with duplicate words, and `wc` to count the
 remaining number of lines:
 
 [source,shell]
-$ sed -E '/(\b\w+\b).*\1/d' | wc -l
+sed -E '/(\b\w+\b).*\1/d' | wc -l
 
 Breakdown of `sed` command:
 
