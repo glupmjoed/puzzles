@@ -22,7 +22,7 @@ below. The path is made up of the characters `[-+|A-Z]`.
 ----
 
 My solution consists of a link:walk.go[Go program] that walks the path and prints
-it out in a linear fashion.
+it out in a linear fashion (+echo+ adds a newline to the output):
 
 [source,shell]
 $ ./bin/walk < example && echo
@@ -32,10 +32,10 @@ Output:
 ||A||+B-+|-|+--+C||+--+D+--|E----|---F
 ----
 
-`sed` collects the letters and adds a newline to the output:
+I then use the +tr+ command to delete any characters not in range +[A-Z]+:
 
 [source,shell]
-$ ./bin/walk < example | sed -E 's/[^A-Z]*([A-Z])+[^A-Z]*/\1/g; s/$/\n/g'
+$ ./bin/walk < example | tr -dc 'A-Z' && echo
 
 Output:
 ----

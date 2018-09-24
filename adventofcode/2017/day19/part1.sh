@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./bin/walk | sed -E 's/[^A-Z]//g; s/$/\n/g'
+./bin/walk | tr -dc 'A-Z' && echo
