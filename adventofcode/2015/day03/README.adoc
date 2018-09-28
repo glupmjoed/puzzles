@@ -1,0 +1,74 @@
+Day 3: Perfectly Spherical Houses in a Vacuum
+=============================================
+
+https://adventofcode.com/2015/day/3
+
+== Part 1
+
+The first part of the puzzle asks you to find the number of grid locations
+visited when following the move instructions in the puzzle input (including the
+starting location). The locations counted must be unique: For instance, if the
+input is +>>^+ (right, right, up), a total of +4+ locations are visited:
++(0,0)+, +(1,0)+, +(2,0)+, +(2,1)+. But if the input is +><<+ (right, left,
+left), only +3+ distinct locations are visited: +(0,0)+, +(1,0)+, +(-1,0)+.
+
+My solution consists of a simple shell pipeline and a few lines of AWK:
+
+[source,shell]
+----
+grep -o . | awk -f coords.awk | sort | uniq | wc -l
+----
+
+The first command (+grep -o+) feeds one character per line to +awk+, which in
+turn executes the script link:coords.awk[coords.awk], shown below:
+
+[source,awk]
+----
+BEGIN { ew = ns = 0; print ew " " ns }
+ /\^/ { ns++ }
+  />/ { ew++ }
+  /v/ { ns-- }
+  /</ { ew-- }
+      { print ew " " ns }
+----
+
+The variables +ew+ (_east-west_) and +ns+ (_north-south_) correspond to the
+two axes of movement. For each line of input, one of these variables is either
+incremented or decremented  depending on the directional character match
+(+^+, +>+, +v+ or +<+), and the value of both variables are printed to +stdout+:
+
+[source,shell]
+----
+$ echo ">><^" | grep -o . | awk -f coords.awk
+----
+
+Output:
+
+----
+0 0
+1 0
+2 0
+1 0
+1 1
+----
+
+Now the problem of identifying all locations visited at least once can be
+reduced to removing duplicate lines (using +sort+/+uniq+):
+
+[source,shell]
+----
+$ echo ">><^" | grep -o . | awk -f coords.awk | sort | uniq
+----
+
+Output:
+
+----
+0 0
+1 0
+1 1
+2 0
+----
+
++uniq+ only removes _adjacent_ duplicate lines, which is why +sort+ is needed.
+The only remaining task is counting the lines, which is done trivially with
++wc+.
