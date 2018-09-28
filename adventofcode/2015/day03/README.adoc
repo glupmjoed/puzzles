@@ -72,3 +72,39 @@ Output:
 +uniq+ only removes _adjacent_ duplicate lines, which is why +sort+ is needed.
 The only remaining task is to count the lines, which is done trivially with
 +wc+.
+
+== Part 2
+
+The second part of the puzzle asks the same question as part 1, except that
+every second line of input should be interpreted as the movement instructions of
+a _second actor_. If, for instance, the input is +>><^+, it is to be treated as
+two seperate (but simultaneous) walks of the grid, namely +><+ and +>^+.
+
+I solved it by creating an extended version of the solution from part 1, with
+some minor differences, including:
+
+* Capturing the newline-seperated input characters in a shell variable
+  (+d="$(grep -o .)"+)
+
+* Running a for loop twice, with the purpose of filtering movement instructions
+  before passing them on to the coordinate creation script (+coords.awk+).
+
+** Extracting even-numbered instructions during the first loop iteration
+   (+sed -E 0~2d+).
+
+** Extracting odd-numbered instructions during the second loop iteration
+   (+sed -E 1~2d+).
+
+* Combining the two seperate coordinate streams created in the loop by piping
+  directly from the loop construction into the subsequent pipeline
+  (+for ... do ... done | ...+).
+
+The full solution is listed below:
+
+[source,shell]
+----
+d="$(grep -o .)"
+for i in 0 1
+do echo "$d" | sed -E $i~2d | awk -f coords.awk
+done | sort | uniq | wc -l
+----
