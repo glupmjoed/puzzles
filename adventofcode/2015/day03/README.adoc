@@ -70,5 +70,5 @@ Output:
 ----
 
 +uniq+ only removes _adjacent_ duplicate lines, which is why +sort+ is needed.
-The only remaining task is counting the lines, which is done trivially with
+The only remaining task is to count the lines, which is done trivially with
 +wc+.
