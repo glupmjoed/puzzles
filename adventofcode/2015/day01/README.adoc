@@ -1,0 +1,135 @@
+Day 1: Not Quite Lisp
+=====================
+
+https://adventofcode.com/2015/day/1
+
+== Part 1
+
+The first part of the puzzle asks you to keep track of opening and closing
+parentheses in the input. If, for instance, the input is +*(()(()(*+ the answer
+is obtained by simply performing the calculation +1 + 1 - 1 + 1 + 1 - 1 + 1+ =
++*3*+.
+
+The structure of the input reminded me of the esoteric programming language
+link:https://en.wikipedia.org/wiki/Brainfuck[Brainfuck], which I took as an
+excuse to solve the puzzle with the following mix of shell script and Brainfuck
+(where +bf+ is one of several Brainfuck interpreters):
+
+[source,shell]
+----
+bf <(tr '()' '+-'; echo .) | od -dAn | xargs
+----
+
+I explain the solution in detail (and offer a simpler alternative) below.
+
+Firstly, the +tr+ command translates characters based on the mapping within its
+arguments:
+
+[source,shell]
+----
+$ echo "(()(()(" | tr '()' '+-'
+----
+
+Output:
+----
+++-++-+
+----
+
+The above sequence of plusses and minusses is a valid Brainfuck program: Each
++++ increments the current (zero-initialized) cell by 1, while each +-+
+decrements the current cell by 1. If we wish to dump the content of the current
+cell to +stdout+ before the Brainfuck program terminates, a +.+ is needed:
+
+[source,shell]
+----
+$ echo -n "(()(()(" | (tr '()' '+-'; echo .)
+----
+
+Output:
+----
+++-++-+.
+----
+
+The next step is to feed the code generated above to the Brainfuck interpreter
+(+bf+):
+
+[source,shell]
+----
+$ echo -n "(()(()(" | bf <(tr '()' '+-'; echo .) && echo
+----
+
+The above invocation prints the replacement character for the raw byte +\x03+ to
++stdout+, followed by a newline (from +&& echo+). This happens because the
+interpreter doesn't really 'print' the value of the current cell, but just sends
+the value (a number in the range +0-255+) as a raw byte to +stdout+.
+
+In this case, the value of the cell is +3+, and the raw byte +\x03+ corresponds
+to the non-printable ASCII character +End-of-Text+ (␃). However, we are not
+interested in the ASCII/UTF-8 interpretation of the byte, but rather its
+_decimal representation_. There are several tools available for this kind of
+task, +od+ ('**o**ctal **d**ump') is one of them:
+
+[source,shell]
+----
+$ echo -n "(()(()(" | bf <(tr '()' '+-'; echo .) | od -dAn
+----
+
+Output:
+
+----
+     3
+----
+
+The +-An+ flag removes +od+'s default file offset column and +-d+ prints the
+byte value in decimal notation.
+
+Lastly, we use +xargs+ to trim any whitespace from the output of +od+:
+
+[source,shell]
+----
+$ echo -n "(()(()(" | bf <(tr '()' '+-'; echo .) | od -dAn | xargs
+----
+
+Output:
+
+----
+3
+----
+
+=== Alternative Solution
+
+The solution described above, while fun, is overly complicated and somewhat
+brittle. It only works if the actual answer is in the +0-255+ range (or possibly
+some other limit - it will depend on the Brainfuck implementation).
+
+Here's a simpler solution, using +grep+ and +awk+:
+
+[source,shell]
+----
+grep -o . | awk '/\(/ { a++ } /\)/ { a-- } END { print a }'
+----
+
++grep -o .+ prints each character on its own line, and the AWK script simply
+counts up or down, depending on the regular expression match for each line.
+
+== Part 2
+
+The second part of the puzzle asks you to return the _position_ of the first
+input character that would cause the partial sum described in part 1 to become
+negative. If, for instance, the input is +*()())*+, the answer is +*5*+:
+
+. +(+ -> +1+
+. +()+ -> +0+
+. +()(+ -> +1+
+. +()()+ -> +0+
+. +()())+ -> +-1+
+
+My solution is a slight variation on the alternative solution from part 1 above:
+
+[source,shell]
+----
+grep -o . | awk '/\(/ { a++ } /\)/ { a-- } { if (a < 0) { print NR; exit } }'
+----
+
+The counting logic is identical to part 1, and as soon as the count dips below
+0 the line number is printed and the program exits.
