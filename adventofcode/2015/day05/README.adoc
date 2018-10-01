@@ -1,0 +1,63 @@
+Day 5: Doesn't He Have Intern-Elves For This?
+=============================================
+
+https://adventofcode.com/2015/day/5
+
+== Part 1
+
+The first part of the puzzle asks you to determine the number of lines in the
+input with the following three properties:
+
+. The line contains at least three characters from the set +[aeiou]+, e.g.
+  +c**o**ff**ee**+.
+
+. The line contains at least one immediately repeating character, e.g.
+  +co**ff**ee+.
+
+. The line does _not_ contain the strings +ab+, +cd+, +pq+ or +xy+.
+
+I solved the puzzle using a series of regex-based filters:
+
+[source,shell]
+----
+sed -E '/[aeiou].*[aeiou].*[aeiou]/!d; /(.)\1/!d; /(ab|cd|pq|xy)/d' | wc -l
+----
+
+The three +sed+ commands map neatly to the three properties described above:
+
+. +/[aeiou].\*[aeiou].*[aeiou]/**!d**+ matches lines *not* (+**!**+) containing
+  3 instances of either +a+, +e+, +i+, +o+ or +u+ and *deletes* them (+**d**+).
+
+. In the second filter, the pattern +/**(.)\1**/+ matches a *single character*
+  (+**.**+), captures that match in a *subexpression* (+**(**+...+**)**+), and
+  then immediately *back-references* the same subexpression (+**\1**+). The
+  +**!d**+ command ensures that all lines *without* (+**!**+) this pattern of
+  repeated characters are *deleted* (+**d**+).
+
+. +/(ab|cd|pq|xy)/**d**+ simply *deletes* (+**d**+) lines containing either
+  +ab+, +cd+, +pq+ or +xy+.
+
+The remaining lines are counted using +wc+.
+
+== Part 2
+
+In the second part of the puzzle the rules from part 1 are scrapped. Lines must
+now adhere to the following two properties:
+
+. The line contains a repeated (but non-overlapping) pair of characters,
+  e.g. +cov**fefe**+.
+
+. The line contains a character repetition with a single character in between,
+  e.g. +covf**e**f**e**+.
+
+I solved it using regex-based filtering (as described in part 1):
+
+[source,shell]
+----
+sed -E '/(.)(.).*\1\2/!d; /(.).\1/!d' | wc -l
+----
+
+Both +sed+ commands utilize the same pattern as the second filter from part 1:
+A *single character* (+**.**+) is captured in each *subexpression*
+(+**(**...**)**+), after which *back-references* (+**\1**+ or +**\2**+) are used
+to match those exact same characters in subsequent locations on the same line.
