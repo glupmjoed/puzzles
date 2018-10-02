@@ -6,9 +6,9 @@ https://adventofcode.com/2017/day/19
 Part 1
 ------
 
-The first part of the puzzle asks you in what order the characters `[A-Z]` appear
-if you follow the path (starting from the top) in a diagram similar to the one
-below. The path is made up of the characters `[-+|A-Z]`:
+The first part of the puzzle asks you in what order the characters `[A-Z]`
+appear if you follow the path (starting from the top) in a diagram similar to
+the one below. The path is made up of the characters `[-+|A-Z]`:
 
 .example.txt
 [source]
@@ -22,8 +22,8 @@ below. The path is made up of the characters `[-+|A-Z]`:
                 
 ----
 
-My solution consists of a link:walk.go[Go program] that walks the path and prints
-it out in a linear fashion (+echo+ adds a newline to the output):
+My solution consists of a link:walk.go[Go program] that walks the path and
+prints it out in a linear fashion (+echo+ adds a newline to the output):
 
 [source,shell]
 $ ./bin/walk < example.txt && echo

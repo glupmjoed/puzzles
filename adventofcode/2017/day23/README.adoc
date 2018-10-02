@@ -11,10 +11,10 @@ link:https://adventofcode.com/2017/day/18[day 18]. Part 1 asks you to simulate a
 program containing a subset of these instructions and count the number of times
 the `mul` instruction is invoked.
 
-I extended link:../day18/[my solution from day 18] to include support for the new
-instructions and log uses of `mul` to `stdout`. The answer to part 1 is obtained
-by wrapping the simulator from day 18 in a shell script that counts the number of
-times `mul` has been logged.
+I extended link:../day18/[my solution from day 18] to include support for the
+new instructions and log uses of `mul` to `stdout`. The answer to part 1 is
+obtained by wrapping the simulator from day 18 in a shell script that counts the
+number of times `mul` has been logged.
 
 Part 2
 ------
@@ -23,9 +23,9 @@ The second part of the puzzle asks you what value would be left in the `h`
 register after the program runs to completion, with a minor change to register
 initialization: Register `a` now starts at `1` (instead of `0`).
 
-The program seems to be running for a _very_ long time in this configuration, and
-the puzzle text suggests that some kind of code optimization might be neccesary
-to complete part 2.
+The program seems to be running for a _very_ long time in this configuration,
+and the puzzle text suggests that some kind of code optimization might be
+neccesary to complete part 2.
 
 Code Transformation
 ~~~~~~~~~~~~~~~~~~~
@@ -119,9 +119,9 @@ END:
 }
 ----
 
-Shortening and combining some of the arithmetic expressions increases readability
-dramatically, and every expression involving `g` can be incorporated into one of
-the conditional jump expressions:
+Shortening and combining some of the arithmetic expressions increases
+readability dramatically, and every expression involving `g` can be incorporated
+into one of the conditional jump expressions:
 
 [source,c]
 ----
@@ -151,9 +151,9 @@ END:
 ----
 
 The main body of both `do-while` loops is executed for all values of `d` and `e`
-in the sequence (`2`, `3`, `4`, ..., `b-1`). This can be expressed more concisely
-with two functionally equivalent `for` loops, and a similar transformation can be
-performed on the outermost `while` loop:
+in the sequence (`2`, `3`, `4`, ..., `b-1`). This can be expressed more
+concisely with two functionally equivalent `for` loops, and a similar
+transformation can be performed on the outermost `while` loop:
 
 [source,c]
 ----
@@ -184,8 +184,8 @@ prime numbers.
 
 A more efficient way to achieve the same result is to remove the inner loop and
 use the modulo operator to identify divisors. I haven't benchmarked it (for
-practical reasons), but this should result in at least a 200000x speedup compared
-to the original code:
+practical reasons), but this should result in at least a 200000x speedup
+compared to the original code:
 
 [source,c]
 ----

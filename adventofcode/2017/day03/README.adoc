@@ -8,18 +8,18 @@ Part 1
 
 The first part of the puzzle asks you to find the
 link:https://en.wikipedia.org/wiki/Taxicab_geometry[Manhattan Distance] between
-an arbitrary value in a sequential square spiral pattern and the center square of
-that pattern.
+an arbitrary value in a sequential square spiral pattern and the center square
+of that pattern.
 
 My solution is based on the observation that the highest value in each "ring" of
-the spiral is an odd square number (1, 9, 25, ...). So the formula for jumping to
-the lower left corner of the next ring is either `((ring number) * 2 + 1) ^ 2` or
-`(previous corner) + (ring number) * 8`.
+the spiral is an odd square number (1, 9, 25, ...). So the formula for jumping
+to the lower left corner of the next ring is either `((ring number) * 2 + 1) ^
+2` or `(previous corner) + (ring number) * 8`.
 
 When the ring containing the target value has been found, we know that the
-distance to the center must be somewhere between `ring number` and `(ring number)
-* 2` and the numerical distance between input value and corner value lets us
-obtain the actual distance by "indexing" into this alternating pattern.
+distance to the center must be somewhere between `ring number` and `(ring
+number) * 2` and the numerical distance between input value and corner value
+lets us obtain the actual distance by "indexing" into this alternating pattern.
 
 The main logic is implemented in these three lines from link:find_distance.c[]:
 

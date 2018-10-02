@@ -19,7 +19,8 @@ Breakdown of `sed` command:
 
 * `-E` makes use of _extended regular expressions_ rather than basic regular
   expressions
-* `\w+` matches one or more _word characters_ (any letters, digits or underscores)
+* `\w+` matches one or more _word characters_ (any letters, digits or
+  underscores)
 * `\b` matches a word boundary, i.e. the space "between" a word- and a non-word
   character
 * `.*` matches a sequence of any characters and of any length
@@ -28,9 +29,9 @@ Breakdown of `sed` command:
 * `sed '/.../d'` deletes a line if any part of it matches the expression between
   `/` and `/`
 
-Taken together, the expression `(\b\w+\b).*\1` matches a line containg a word, if
-and only if the same word occurs again at some point on the right hand side (but
-still on the same line).
+Taken together, the expression `(\b\w+\b).*\1` matches a line containg a word,
+if and only if the same word occurs again at some point on the right hand side
+(but still on the same line).
 
 Part 2
 ------
