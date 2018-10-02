@@ -8,8 +8,9 @@ Part 1
 
 The first part of the puzzle asks you in what order the characters `[A-Z]` appear
 if you follow the path (starting from the top) in a diagram similar to the one
-below. The path is made up of the characters `[-+|A-Z]`.
+below. The path is made up of the characters `[-+|A-Z]`:
 
+.example.txt
 [source]
 ----
      |          
@@ -25,9 +26,9 @@ My solution consists of a link:walk.go[Go program] that walks the path and print
 it out in a linear fashion (+echo+ adds a newline to the output):
 
 [source,shell]
-$ ./bin/walk < example && echo
+$ ./bin/walk < example.txt && echo
 
-Output:
+.Output:
 ----
 ||A||+B-+|-|+--+C||+--+D+--|E----|---F
 ----
@@ -35,9 +36,9 @@ Output:
 I then use the +tr+ command to delete any characters not in range +[A-Z]+:
 
 [source,shell]
-$ ./bin/walk < example | tr -dc 'A-Z' && echo
+$ ./bin/walk < example.txt | tr -dc 'A-Z' && echo
 
-Output:
+.Output:
 ----
 ABCDEF
 ----
@@ -50,7 +51,7 @@ solution is obtained trivially using link:walk.go[] from part 1 and the `wc`
 command to count the number of bytes:
 
 [source,shell]
-$ ./bin/walk < example | wc -c
+$ ./bin/walk < example.txt | wc -c
 
 Output:
 ----
