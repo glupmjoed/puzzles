@@ -12,6 +12,7 @@ func main() {
 	lines := strings.Split(string(input), "\n")
 	var row, col, dir int
 	col, dir = strings.Index(lines[row], "|"), 1
+	defer fmt.Println()
 	for val := byte('|'); ; {
 		// vertical walk
 		for val != ' ' {

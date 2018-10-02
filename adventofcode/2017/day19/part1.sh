@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./bin/walk | tr -dc 'A-Z' && echo
+./bin/walk | tr -dc 'A-Z\n'

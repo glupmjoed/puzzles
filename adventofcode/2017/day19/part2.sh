@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./bin/walk | wc -c
+./bin/walk | tr -d '\n' | wc -c
