@@ -28,7 +28,8 @@ prints it out in a linear fashion:
 [source,shell]
 $ ./bin/walk < example.txt
 
-.Output:
+Output:
+
 ----
 ||A||+B-+|-|+--+C||+--+D+--|E----|---F
 ----
@@ -39,7 +40,8 @@ the +[A-Z]+ range:
 [source,shell]
 $ ./bin/walk < example.txt | tr -dc 'A-Z\n'
 
-.Output:
+Output:
+
 ----
 ABCDEF
 ----
@@ -56,6 +58,7 @@ number of remaining bytes (+wc+):
 $ ./bin/walk < example.txt | tr -d '\n' | wc -c
 
 Output:
+
 ----
 38
 ----
