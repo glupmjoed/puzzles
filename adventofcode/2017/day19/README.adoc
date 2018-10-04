@@ -8,9 +8,9 @@ Part 1
 
 The first part of the puzzle asks you in what order the characters `[A-Z]`
 appear if you follow the path (starting from the top) in a diagram similar to
-the one below. The path is made up of the characters `[-+|A-Z]`:
+the one below. The path is made up of the characters `[-+|A-Z]`.
 
-.example.txt
+_example.txt_:
 [source]
 ----
      |          
