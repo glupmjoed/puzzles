@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- in1 * in2, in3 * in4, ... -> out
+
     COPYFROM 9
     COPYTO   8
     COPYTO   2

@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- max(in1, in2), max(in3, in4), ... -> out
+
     JUMP     c
 a:
     COPYFROM 0

@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- abs(in), ... -> out
+
     JUMP     c
 a:
     COPYTO   0

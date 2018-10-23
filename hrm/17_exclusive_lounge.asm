@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- sign(in1) != sign(in2), sign(in3) != sign(in4), ... -> out
+
 a:
     INBOX
     JUMPN    c

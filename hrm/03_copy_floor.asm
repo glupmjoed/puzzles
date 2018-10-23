@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- 'B', 'U', 'G' -> out
+
     COPYFROM 4
     OUTBOX
     COPYFROM 0

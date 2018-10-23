@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- in2 - in1, in1 - in2, ... -> out
+
 a:
     INBOX
     COPYTO   0
