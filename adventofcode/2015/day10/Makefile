@@ -2,7 +2,7 @@ all: bin/filter
 
 bin/filter: filter.go
 	mkdir -p bin
-	cd bin; go build ../filter.go
+	go build -o bin/filter filter.go
 
 .PHONY: clean
 
