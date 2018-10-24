@@ -1,5 +1,5 @@
-all: filter
+all: bin/filter
 
-filter: filter.go
+bin/filter: filter.go
 	mkdir -p bin
 	cd bin; go build ../filter.go
