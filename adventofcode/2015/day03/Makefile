@@ -3,4 +3,4 @@ all:
 .PHONY: clean
 
 clean:
-	rm -rf *~
+	rm -f *~
