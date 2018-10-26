@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- reverse([in1, in2 .. \0]), ... -> out
+
     JUMP     b
 a:
     BUMPUP   14

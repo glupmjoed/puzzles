@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- count([FLOOR[1], FLOOR[2] .. \0], in), ... -> out
+
     JUMP     b
 a:
     COPYFROM 18

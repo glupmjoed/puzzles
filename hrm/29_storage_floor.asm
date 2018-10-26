@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- FLOOR[in], ... -> out
+
 a:
     INBOX
     COPYTO   10

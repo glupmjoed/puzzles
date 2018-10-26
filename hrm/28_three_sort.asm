@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- sort([in1 ..  in3]), ... -> out
+
     JUMP     d
 a:
     COPYFROM 1
