@@ -1,3 +1,3 @@
 #!/bin/bash
 
-awk '{ print } END { print NR }' | tac | ./calc_delay
+awk '{ print } END { print NR }' | tac | ./bin/calc_delay
