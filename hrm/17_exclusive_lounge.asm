@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- sign(in1) != sign(in2), sign(in3) != sign(in4), ... -> out
+-- sign(in1) != sign(in2), ... -> out
 
 a:
     INBOX

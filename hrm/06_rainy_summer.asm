@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- in1 + in2, in3 + in4, ... -> out
+-- in1 + in2, ... -> out
 
 a:
     INBOX
