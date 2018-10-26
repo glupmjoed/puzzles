@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- min([in1, in2 .. \0]), ... -> out
+
     JUMP     b
 a:
     COPYFROM 0

@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- in1 % in2, ... -> out
+
     JUMP     b
 a:
     ADD      2

@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- binom(in + 1, 2), ... -> out
+
     JUMP     c
 a:
     COPYFROM 1
