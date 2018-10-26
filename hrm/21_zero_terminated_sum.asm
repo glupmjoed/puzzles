@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- Σ([in1, in2 .. \0]), ... -> out
+-- Σ([in1, in2 .. ~\0]), ... -> out
 
     JUMP     c
 a:

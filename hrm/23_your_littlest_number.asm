@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- min([in1, in2 .. \0]), ... -> out
+-- min([in1, in2 .. ~\0]), ... -> out
 
     JUMP     b
 a:
