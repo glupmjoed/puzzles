@@ -4,7 +4,7 @@ bin/calc_delay: calc_delay.c
 	mkdir -p bin
 	gcc -std=c11 -o bin/calc_delay calc_delay.c
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

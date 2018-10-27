@@ -3,7 +3,7 @@ all: bin/hash
 bin/hash: hash.go
 	go build -o bin/hash hash.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

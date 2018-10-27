@@ -8,7 +8,7 @@ bin/after2017: after2017.go
 	mkdir -p bin
 	go build -o bin/after2017 after2017.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

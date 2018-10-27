@@ -8,7 +8,7 @@ bin/judge2: judge2.go
 	mkdir -p bin
 	go build -o bin/judge2 judge2.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

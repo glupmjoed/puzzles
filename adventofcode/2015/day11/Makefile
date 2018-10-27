@@ -4,7 +4,7 @@ bin/inc3filter: inc3filter.go
 	mkdir -p bin
 	go build -o bin/inc3filter inc3filter.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

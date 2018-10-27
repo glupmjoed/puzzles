@@ -5,7 +5,7 @@ bin/iteration5: iteration5.c
 	mkdir -p bin
 	gcc -std=c11 -o bin/iteration5 iteration5.c
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~

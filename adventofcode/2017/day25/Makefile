@@ -8,7 +8,7 @@ state_machine.go:
 	cp head.go state_machine.go
 	sed 's/[.:]$$//g' | awk -f transpile_main.awk | gofmt >> state_machine.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin state_machine.go *~

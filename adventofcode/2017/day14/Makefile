@@ -1,7 +1,7 @@
 all:
 	$(MAKE) -C ../day10 --no-print-directory
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -f *~

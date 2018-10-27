@@ -1,6 +1,6 @@
 all:
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -f *~

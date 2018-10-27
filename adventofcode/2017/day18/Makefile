@@ -4,7 +4,7 @@ bin/simulate: simulate.go
 	mkdir -p bin
 	go build -o bin/simulate simulate.go
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
 	rm -rf bin *~
