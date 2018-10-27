@@ -1,5 +1,5 @@
 all: bin/iteration5
-	make -C ../day18 --no-print-directory
+	$(MAKE) -C ../day18 --no-print-directory
 
 bin/iteration5: iteration5.c
 	mkdir -p bin
