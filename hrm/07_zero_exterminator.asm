@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- in (where in != 0), ... -> out
+-- in1 (where in1 != 0), ... -> out
 
 a:
     INBOX

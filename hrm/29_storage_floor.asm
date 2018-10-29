@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- FLOOR[in], ... -> out
+-- FLOOR[in1], ... -> out
 
 a:
     INBOX

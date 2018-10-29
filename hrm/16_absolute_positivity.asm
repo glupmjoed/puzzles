@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- abs(in), ... -> out
+-- abs(in1), ... -> out
 
     JUMP     c
 a:

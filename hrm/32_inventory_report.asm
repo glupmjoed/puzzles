@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- count([FLOOR[1], FLOOR[2] .. ~\0], in), ... -> out
+-- count([FLOOR[1], FLOOR[2] .. ~\0], in1), ... -> out
 
     JUMP     b
 a:

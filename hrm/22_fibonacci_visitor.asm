@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- fibseq[fibseq <= in], ... -> out
+-- fibseq[fibseq <= in1], ... -> out
 
 a:
     INBOX

@@ -1,6 +1,6 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
--- binom(in + 1, 2), ... -> out
+-- binom(in1 + 1, 2), ... -> out
 
     JUMP     c
 a:
