@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- lstrip([in1 / 100, in1 % 100 / 100, in1 % 10], \0), ... -> out
+
                 -- r9 = 0
                 -- r10 = 10
                 -- r11 = 100

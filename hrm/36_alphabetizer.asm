@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- min([in1, in2 .. ~\0], [.. ~\0]) -> out
+
     COPYFROM 23
     COPYTO   12
 a:                -- load 1st word (w1)

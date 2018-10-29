@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- [FLOOR[in1], FLOOR[FLOOR[in1+1]] .. ~FLOOR[-1]], ... -> out
+
 a:
     INBOX
 b:

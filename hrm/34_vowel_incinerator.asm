@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- in1 (where in1 ∉ {a, e, i, o, u}), ... -> out
+
     JUMP     b
 a:
     COPYFROM 7

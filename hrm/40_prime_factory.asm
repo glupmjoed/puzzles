@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- primfac(in1), ... -> out
+
     COPYFROM 24
     COPYTO   20
     COPYTO   0

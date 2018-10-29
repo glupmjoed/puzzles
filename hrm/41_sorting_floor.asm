@@ -1,5 +1,7 @@
 -- HUMAN RESOURCE MACHINE PROGRAM --
 
+-- sort([in1, in2 .. ~\0]), ... -> out
+
 a:
     COPYFROM 24   -- (n is length of array)
     COPYTO   22   -- m = 0 (m is index of minimum element)
