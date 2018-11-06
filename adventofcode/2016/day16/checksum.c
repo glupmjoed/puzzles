@@ -35,7 +35,7 @@ int checksum(int depth) {
   return (sum1 + sum2 + 1) & 1;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
   state = argv;
   n = strlen(state[1]);
   for (int i = 0; i < n; i++) { state[1][i] -= '0'; state[2][i] -= '0'; }

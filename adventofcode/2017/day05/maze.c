@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
   size_t len;
   scanf("%d", &len);
   int i, *a = malloc(sizeof(int)*len);
