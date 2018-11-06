@@ -12,10 +12,9 @@ int interject() {
   if (m & idx) {
     m &= ~idx;
     return 1;
-  } else {
-    m |= idx;
-    return 0;
   }
+  m |= idx;
+  return 0;
 }
 
 // generate next fill data character
