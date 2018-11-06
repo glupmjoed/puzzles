@@ -7,9 +7,10 @@
 #define SZM ((1 << BITW) - 1)
 #define L(x) (x = (x + SZ - 1) & SZM)
 #define R(x) (x = (x + 1) & SZM)
+#define BP_SWP(a, b) {uint8_t *c = a; a = b; b = c;}
 
 int main() {
-  uint8_t *dst, *src, *tmp;
+  uint8_t *dst, *src;
   src = malloc(sizeof(uint8_t) * SZ);
   dst = malloc(sizeof(uint8_t) * SZ);
   int i, j, len, offset, skip;
@@ -18,7 +19,7 @@ int main() {
     j = SZ - (skip & SZM);
     for (i = 0; i < len; i++) { L(j); dst[j] = src[i]; }
     for (j = (SZ - (skip & SZM)) & SZM ; i < SZ; R(j)) dst[j] = src[i++];
-    tmp = src; src = dst; dst = tmp;
+    BP_SWP(src, dst);
   }
   offset = (SZ - (offset & SZM)) & SZM;
   for (i = 0; i < SZ; i++) { printf("%d\n", src[offset]); R(offset); }
