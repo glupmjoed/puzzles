@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
-  size_t len;
+  int len;
   scanf("%d", &len);
   int i, *a = malloc(sizeof(int)*len);
   for (i = len-1; scanf("%d", a+i) == 1; i--);
