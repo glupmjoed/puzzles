@@ -1,3 +1,3 @@
 #!/bin/bash
 
-grep -o . | ./coords.awk | sort | uniq | wc -l
+grep -o . | ./coords.awk | sort -u | wc -l
